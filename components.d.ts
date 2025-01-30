@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     FiltroStatus: typeof import('./src/components/FiltroStatus.vue')['default']
     FormTasks: typeof import('./src/components/FormTasks.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableTask: typeof import('./src/components/TableTask.vue')['default']
