@@ -1,66 +1,67 @@
 <template>
-  <v-dialog v-model="dialog" max-width="780px">
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn v-bind="attrs"  v-on="on" color="primary" @click="dialog = !dialog">
-        <v-icon>mdi-plus</v-icon>
-        Crear Tarea
-      </v-btn>
-    </template>
-    <v-card>
-      <v-card-title>
-        <h2>Crear Tarea</h2>
-      </v-card-title>
-      <v-card-text>
-        <v-form>
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                v-model="title"
-                label="Título"
-                required
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="8">
-              <v-textarea
-                v-model="description"
-                label="Descripción"
-                required
-              ></v-textarea>
-            </v-col>
-            <v-col cols="12" sm="4">
-              <v-autocomplete
-                v-model="selected"
-                :items="items"
-                label="Selecciona un item"
-                :item-text="item => item.dsc"
-                item-value="id"
-              ></v-autocomplete>
-            </v-col>
-            <v-col cols="12" sm="6" class="d-flex align-center">
-              <v-date-picker
-                v-model="date"
-                title="Fecha Límite"
-                required
-                format="yyyy-MM-dd"
-              ></v-date-picker>
-            </v-col>
-            <v-col cols="12" sm="6" class="d-flex align-center justify-center">
-              <v-time-picker
-                v-model="time"
-                title="Hora Límite"
-                required
-                format="24hr"
-              ></v-time-picker>
-            </v-col>
-          </v-row>
+  <div>
+    <v-btn @click="dialog = !dialog" color="primary">
+      <v-icon>mdi-filter</v-icon>
+      Filtrar por estado
+    </v-btn>
 
-          <v-btn @click="createTask" color="primary"><v-icon>mdi-content-save</v-icon> Guardar</v-btn>
-          <v-btn @click="dialog = !dialog" color="error"><v-icon>mdi-close</v-icon> Cancelar</v-btn>
+    <v-dialog v-model="dialog" max-width="780px">
+      <v-card>
+        <v-card-title>
+          <h2>Crear Tarea</h2>
+        </v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="title"
+                  label="Título"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="8">
+                <v-textarea
+                  v-model="description"
+                  label="Descripción"
+                  required
+                ></v-textarea>
+              </v-col>
+              <v-col cols="12" sm="4">
+                <v-autocomplete
+                  v-model="selected"
+                  :items="items"
+                  label="Selecciona un item"
+                  :item-text="item => item.dsc"
+                  item-value="id"
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12" sm="6" class="d-flex align-center">
+                <v-date-picker
+                  v-model="date"
+                  title="Fecha Límite"
+                  required
+                  format="yyyy-MM-dd"
+                ></v-date-picker>
+              </v-col>
+              <v-col cols="12" sm="6" class="d-flex align-center justify-center">
+                <v-time-picker
+                  v-model="time"
+                  title="Hora Límite"
+                  required
+                  format="24hr"
+                ></v-time-picker>
+              </v-col>
+            </v-row>
 
-        </v-form>
-      </v-card-text>
-    </v-card>
-  </v-dialog>
+            <v-btn @click="createTask" color="primary"><v-icon>mdi-content-save</v-icon> Guardar</v-btn>
+            <v-btn @click="dialog = !dialog" color="error"><v-icon>mdi-close</v-icon> Cancelar</v-btn>
+
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 <script setup lang="ts">
 import {onMounted, ref, watch} from "vue";

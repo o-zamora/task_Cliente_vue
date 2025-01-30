@@ -11,7 +11,7 @@
         :items-length="lengthContent"
         :loading="loading"
         item-key="id"
-        @update:options="getItems"
+        @update:options="applyFiltersTable"
       >
         <template v-slot:item.id_status="{ item }">
           <span>
@@ -43,9 +43,10 @@ const props = defineProps({
 })
 
 const items = ref([])
-const itemsPerPage = ref(5)
 const lengthContent = ref(0)
 const loading = ref(false)
+const page = ref(1)
+const itemsPerPage = ref(5)
 
 watch(() => props.filter, async (value) => {
   await getLengthContent()
@@ -71,12 +72,11 @@ onMounted(async () => {
   await getItems()
 })
 
-const getItems = async ({ page, itemsPerPage, sortBy }) => {
+const getItems = async () => {
   try {
-    console.log('getItems tableTask', page, itemsPerPage, sortBy)
     loading.value = true
     let filter = props.filter ? `?id_status=${props.filter}` : ''
-    filter += props.filter ? `&page=${page}` : `?page=${page}`
+    filter += props.filter ? `&page=${page.value}` : `?page=${page.value}`
 
     const response = await axios.get("http://127.0.0.1:8000/api/tasks" + filter)
     console.log(response.data, 'response in getItems tableTask')
@@ -103,6 +103,14 @@ const getLengthContent = async () => {
   finally {
     loading.value = false
   }
+}
+
+const applyFiltersTable = async ({ page, itemsPerPage, sortBy }) => {
+  console.log('applyFiltersTable', page, itemsPerPage, sortBy)
+  page.value = page
+  itemsPerPage.value = itemsPerPage
+  sortBy.value = sortBy
+  await getItems()
 }
 </script>
 <style scoped>
