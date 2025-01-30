@@ -34,7 +34,7 @@ export default defineConfig({
     }),
   ],
   define: { 'process.env': {} },
-  base: 'https://o-zamora.github.io/task_Cliente_vue/',
+  base: '/task_Cliente_vue/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
